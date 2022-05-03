@@ -1,3 +1,5 @@
+const dotenv = require("dotenv");
+dotenv.config();
 const bcrypt = require('bcrypt'); // Pluggin pour hasher les mdp
 const jwt = require('jsonwebtoken'); // Pluggin pour générer un Token
 const Joi = require("joi"); // Pluggin permettant l'utilisation de Regex
@@ -45,7 +47,7 @@ exports.login = (req, res, next) => {
                 userId: user._id,
                 token: jwt.sign(
                     { userId: user._id },
-                    'RANDOM_TOKEN_SECRET',
+                    process.env.TOKEN,
                     { expiresIn: '24h' }
                 )
             });
